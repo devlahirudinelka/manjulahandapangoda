@@ -40,7 +40,7 @@ export default function ServicesPage() {
                 zoom
               />
             </Link>
-            <div className={`lg:col-span-6 ${i % 2 ? "lg:order-1 lg:col-start-1" : "lg:col-start-7"}`}>
+            <div data-reveal className={`lg:col-span-6 ${i % 2 ? "lg:order-1 lg:col-start-1" : "lg:col-start-7"}`}>
               <p className="eyebrow">
                 0{i + 1} · {s.kicker}
               </p>

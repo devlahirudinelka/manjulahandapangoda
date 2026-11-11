@@ -59,7 +59,7 @@ export default async function ServicePage({ params }: PageProps<"/services/[slug
 
       <section className="bg-paper py-24 lg:py-32">
         <div className="mx-auto grid max-w-6xl gap-16 px-6 lg:grid-cols-2 lg:px-10">
-          <div className="prose-calm text-lg leading-relaxed text-stone">
+          <div data-reveal className="prose-calm text-lg leading-relaxed text-stone">
             {service.intro.map((p) => (
               <p key={p}>{p}</p>
             ))}
@@ -68,7 +68,7 @@ export default async function ServicePage({ params }: PageProps<"/services/[slug
               {service.idealFor}
             </p>
           </div>
-          <div className="border border-line p-8 lg:p-12">
+          <div data-reveal data-reveal-delay={1} className="border border-line p-8 lg:p-12">
             <h2 className="display text-3xl">What’s included</h2>
             <ul className="mt-8 space-y-4">
               {service.includes.map((item) => (
@@ -89,7 +89,11 @@ export default async function ServicePage({ params }: PageProps<"/services/[slug
               Enquire on WhatsApp
             </a>
             <p className="mt-4 text-center text-xs text-stone">
-              Every booking is tailored, so we’ll share pricing once we know your date and needs.
+              See our{" "}
+              <Link href="/pricing" className="underline underline-offset-4 hover:text-ink">
+                2027 &amp; 2028 rates
+              </Link>
+              , or message us for a quotation.
             </p>
           </div>
         </div>
@@ -103,10 +107,11 @@ export default async function ServicePage({ params }: PageProps<"/services/[slug
             service.looks.length >= 4 ? "md:grid-cols-4" : "md:grid-cols-3"
           }`}
         >
-          {service.looks.map((key) => (
+          {service.looks.map((key, i) => (
             <Photo
               key={key}
               name={key}
+              delay={i}
               className="aspect-[3/4]"
               sizes="(min-width: 768px) 25vw, 50vw"
               zoom
@@ -124,8 +129,8 @@ export default async function ServicePage({ params }: PageProps<"/services/[slug
         <div className="mx-auto max-w-7xl px-6 lg:px-10">
           <p className="eyebrow text-center">Also explore</p>
           <div className="mt-12 grid gap-8 md:grid-cols-3">
-            {others.map((s) => (
-              <Link key={s.slug} href={`/services/${s.slug}`} className="group flex items-center gap-6">
+            {others.map((s, i) => (
+              <Link key={s.slug} href={`/services/${s.slug}`} data-reveal data-reveal-delay={i} className="group flex items-center gap-6">
                 <Photo name={s.cover} className="aspect-square w-24 shrink-0" sizes="96px" />
                 <div>
                   <h3 className="display text-2xl group-hover:text-gold">{s.title}</h3>

@@ -25,6 +25,7 @@ export default function ExperiencePage() {
           {journey.map((step, i) => (
             <li
               key={step.title}
+              data-reveal
               className="grid gap-4 border-t border-line py-10 sm:grid-cols-[8rem_1fr] sm:gap-10"
             >
               <span className="display text-6xl text-gold">0{i + 1}</span>

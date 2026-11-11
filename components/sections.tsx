@@ -38,7 +38,7 @@ export function SectionHeading({
   className?: string;
 }) {
   return (
-    <div className={`${align === "center" ? "text-center" : ""} ${className}`}>
+    <div data-reveal className={`${align === "center" ? "text-center" : ""} ${className}`}>
       <p className="eyebrow">{eyebrow}</p>
       <h2 className="display mt-5 text-4xl sm:text-5xl">{title}</h2>
     </div>
@@ -66,9 +66,9 @@ export function BookingBand({
 }) {
   return (
     <section className="relative isolate overflow-hidden">
-      <Photo name={photo} className="!absolute inset-0 -z-10" sizes="100vw" />
+      <Photo name={photo} className="!absolute inset-0 -z-10" sizes="100vw" reveal={false} />
       <div className="absolute inset-0 -z-10 bg-ink/55" />
-      <div className="mx-auto max-w-3xl px-6 py-32 text-center text-paper lg:py-44">
+      <div data-reveal className="mx-auto max-w-3xl px-6 py-32 text-center text-paper lg:py-44">
         <p className="eyebrow !text-gold-soft">Now booking</p>
         <h2 className="display mt-6 text-5xl sm:text-6xl">{title}</h2>
         <p className="mx-auto mt-6 max-w-xl text-lg text-paper/80">

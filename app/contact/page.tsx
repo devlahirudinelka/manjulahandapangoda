@@ -46,7 +46,7 @@ export default function ContactPage() {
       </PageIntro>
 
       <section className="mx-auto grid max-w-7xl gap-16 px-6 pb-28 lg:grid-cols-12 lg:gap-20 lg:px-10 lg:pb-36">
-        <div className="lg:col-span-7">
+        <div data-reveal className="lg:col-span-7">
           <h2 className="display text-4xl">Send an enquiry</h2>
           <p className="mt-3 text-stone">
             Fill this in and it will open in WhatsApp or your email, ready to send.

@@ -43,7 +43,7 @@ export default function AboutPage() {
           </div>
         </div>
 
-        <div className="lg:col-span-7">
+        <div data-reveal className="lg:col-span-7">
           <p className="display text-3xl leading-snug sm:text-4xl">
             Sophisticated, elegant and timeless bridal looks that celebrate
             individuality and tradition.
@@ -76,7 +76,7 @@ export default function AboutPage() {
 
           <div className="mt-16 grid grid-cols-2 gap-4">
             <Photo name="kandyanProfile" className="aspect-[3/4]" sizes="(min-width: 1024px) 28vw, 50vw" />
-            <Photo name="laceVeil" className="mt-12 aspect-[3/4]" sizes="(min-width: 1024px) 28vw, 50vw" />
+            <Photo name="laceVeil" className="mt-12 aspect-[3/4]" sizes="(min-width: 1024px) 28vw, 50vw" delay={1} />
           </div>
         </div>
       </section>
@@ -85,8 +85,8 @@ export default function AboutPage() {
         <div className="mx-auto max-w-6xl px-6 lg:px-10">
           <SectionHeading eyebrow="Philosophy" title="What every look is built on" />
           <div className="mt-16 grid gap-12 text-center md:grid-cols-3">
-            {values.map((v) => (
-              <div key={v.title}>
+            {values.map((v, i) => (
+              <div key={v.title} data-reveal data-reveal-delay={i}>
                 <Ornament />
                 <h3 className="display mt-6 text-3xl">{v.title}</h3>
                 <p className="mt-4 leading-relaxed text-stone">{v.text}</p>

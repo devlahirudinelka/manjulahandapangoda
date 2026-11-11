@@ -29,6 +29,7 @@ export function whatsappLink(text?: string) {
 export const nav = [
   { href: "/about", label: "About" },
   { href: "/services", label: "Services" },
+  { href: "/pricing", label: "Pricing" },
   { href: "/gallery", label: "Gallery" },
   { href: "/experience", label: "Experience" },
   { href: "/contact", label: "Contact" },
@@ -205,7 +206,11 @@ export const faqs = [
     a: "Photos of your outfit, your jewellery (or photos of it), your venue and timings, and any inspiration images you love.",
   },
   {
+    q: "How much does bridal styling cost?",
+    a: "Our full 2027 and 2028 rates are on the Pricing page, covering dressing, bouquets, trials and jewellery rental.",
+  },
+  {
     q: "How do I confirm my booking?",
-    a: "Send an enquiry by WhatsApp, phone or email with your date. We will confirm availability and walk you through the next steps.",
+    a: "Send an enquiry by WhatsApp, phone or email with your date. Your date is confirmed once an advance of Rs. 30,000 is received; it is not refunded on cancellation. A refundable deposit of Rs. 20,000 is also kept, and full payment is settled on your trial day.",
   },
 ];

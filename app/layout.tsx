@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
+import { ScrollReveal } from "@/components/scroll-reveal";
 import { SmoothScroll } from "@/components/smooth-scroll";
 import { photos, photoSrc } from "@/lib/images";
 import { site } from "@/lib/site";
@@ -71,7 +72,11 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         >
           Skip to content
         </a>
+        <noscript>
+          <style>{`[data-reveal],[data-reveal] img{opacity:1!important;transform:none!important}.img-fade{opacity:1!important;filter:none!important}`}</style>
+        </noscript>
         <SmoothScroll>
+          <ScrollReveal />
           <Header />
           <main id="main" className="flex-1">
             {children}

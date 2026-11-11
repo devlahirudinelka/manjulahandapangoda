@@ -1,6 +1,6 @@
 "use client";
 
-import Image from "next/image";
+import { FadeImage } from "@/components/fade-image";
 import { useCallback, useEffect, useState } from "react";
 import { useScrollLock } from "@/components/smooth-scroll";
 import { galleryOrder, photos, photoSrc, type Photo, type Style } from "@/lib/images";
@@ -64,14 +64,19 @@ export function GalleryGrid() {
 
       <ul className="mt-14 columns-2 gap-3 md:columns-3 md:gap-4 lg:columns-4">
         {items.map((p, i) => (
-          <li key={p.file} className="mb-3 break-inside-avoid md:mb-4">
+          <li
+            key={p.file}
+            data-reveal
+            data-reveal-delay={i % 4}
+            className="mb-3 break-inside-avoid md:mb-4"
+          >
             <button
               type="button"
               onClick={() => setIndex(i)}
               className="zoom-img group relative block w-full overflow-hidden bg-sand"
               aria-label={`Open photo: ${p.alt}`}
             >
-              <Image
+              <FadeImage
                 src={photoSrc(p)}
                 alt={p.alt}
                 width={p.width}
@@ -95,7 +100,8 @@ export function GalleryGrid() {
           onClick={close}
         >
           <div className="relative h-full w-full" onClick={(e) => e.stopPropagation()}>
-            <Image
+            <FadeImage
+              key={current.file}
               src={photoSrc(current)}
               alt={current.alt}
               fill

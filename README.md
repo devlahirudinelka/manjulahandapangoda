@@ -23,6 +23,7 @@ pnpm build && pnpm start
 | Indian Bridal | `/services/indian-bridal` |
 | Bridal Hair & Makeup | `/services/hair-and-makeup` |
 | Occasion Dressing | `/services/occasion-dressing` |
+| Pricing (2027, 2028, homecoming & engagement) | `/pricing` |
 | Gallery (filter + lightbox) | `/gallery` |
 | Experience & FAQs | `/experience` |
 | Contact (WhatsApp / email enquiry form, map) | `/contact` |
@@ -32,6 +33,7 @@ Also generated: `/sitemap.xml`, `/robots.txt`, a 404 page and LocalBusiness stru
 ## Where to edit
 
 - **Contact details, social links, service text, FAQs** → `lib/site.ts`
+- **Prices and payment notes** → `lib/pricing.ts`
 - **Photos, alt text and gallery order** → `lib/images.ts`
 - **Colours and type** → `app/globals.css` (`@theme` block)
 - **Live domain** → set `NEXT_PUBLIC_SITE_URL` (used for SEO, sitemap and social previews)

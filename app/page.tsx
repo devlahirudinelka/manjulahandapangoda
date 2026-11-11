@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { HeroSlider } from "@/components/hero-slider";
 import { Photo } from "@/components/photo";
 import { BookingBand, Ornament, SectionHeading } from "@/components/sections";
 import { photos, photoSrc } from "@/lib/images";
@@ -32,14 +33,9 @@ export default function Home() {
 
       {/* Hero */}
       <section className="relative isolate flex min-h-[100svh] items-end overflow-hidden">
-        <Photo
-          name="terrace"
-          className="!absolute inset-0 -z-10"
-          sizes="100vw"
-          preload
-        />
+        <HeroSlider />
         <div className="absolute inset-0 -z-10 bg-gradient-to-t from-ink/70 via-ink/20 to-ink/30" />
-        <div className="mx-auto w-full max-w-7xl px-6 pb-20 text-paper lg:px-10 lg:pb-28">
+        <div className="mx-auto w-full max-w-7xl px-6 pb-32 text-paper lg:px-10 lg:pb-28">
           <p className="eyebrow rise !text-gold-soft">
             Bridal dresser · Hair &amp; makeup · Colombo
           </p>
@@ -61,7 +57,7 @@ export default function Home() {
       </section>
 
       {/* Statement */}
-      <section className="mx-auto max-w-4xl px-6 py-28 text-center lg:py-40">
+      <section data-reveal className="mx-auto max-w-4xl px-6 py-28 text-center lg:py-40">
         <Ornament />
         <p className="display mt-10 text-3xl leading-snug sm:text-4xl lg:text-[2.75rem]">
           A studio built around one goal: helping every bride feel entirely like
@@ -83,6 +79,8 @@ export default function Home() {
               <Link
                 key={s.slug}
                 href={`/services/${s.slug}`}
+                data-reveal
+                data-reveal-delay={i}
                 className={`group block ${i === 1 ? "md:mt-16" : ""}`}
               >
                 <Photo
@@ -98,9 +96,12 @@ export default function Home() {
               </Link>
             ))}
           </div>
-          <div className="mt-16 text-center">
+          <div className="mt-16 flex flex-col items-center justify-center gap-4 sm:flex-row">
             <Link href="/services" className="btn btn-line">
               All services
+            </Link>
+            <Link href="/pricing" className="link-line sm:ml-6">
+              View pricing
             </Link>
           </div>
         </div>
@@ -115,7 +116,7 @@ export default function Home() {
             sizes="(min-width: 1024px) 40vw, 100vw"
           />
         </div>
-        <div className="lg:col-span-7">
+        <div data-reveal className="lg:col-span-7">
           <p className="eyebrow">Our founder</p>
           <h2 className="display mt-5 text-5xl sm:text-6xl">
             An artist <em>for every bride</em>
@@ -151,10 +152,10 @@ export default function Home() {
           </div>
           <div className="mt-14 grid grid-cols-2 gap-3 md:grid-cols-4 md:gap-4">
             <Photo name="kandyanIvory" className="col-span-2 row-span-2 aspect-[4/5] md:aspect-auto" sizes="(min-width: 768px) 50vw, 100vw" zoom />
-            <Photo name="westernVeil" className="aspect-[3/4]" sizes="25vw" zoom />
-            <Photo name="indianRed" className="aspect-[3/4]" sizes="25vw" zoom />
-            <Photo name="laceVeil" className="aspect-[3/4]" sizes="25vw" zoom />
-            <Photo name="goldGaze" className="aspect-[3/4]" sizes="25vw" zoom />
+            <Photo name="westernVeil" className="aspect-[3/4]" sizes="25vw" zoom delay={1} />
+            <Photo name="indianRed" className="aspect-[3/4]" sizes="25vw" zoom delay={2} />
+            <Photo name="laceVeil" className="aspect-[3/4]" sizes="25vw" zoom delay={3} />
+            <Photo name="goldGaze" className="aspect-[3/4]" sizes="25vw" zoom delay={4} />
           </div>
         </div>
       </section>
@@ -164,7 +165,7 @@ export default function Home() {
         <SectionHeading eyebrow="The experience" title="From first meeting to final touch" />
         <ol className="mt-16 grid gap-px overflow-hidden border border-line bg-line sm:grid-cols-2 lg:grid-cols-4">
           {journey.map((step, i) => (
-            <li key={step.title} className="bg-ivory p-8 lg:p-10">
+            <li key={step.title} data-reveal data-reveal-delay={i} className="bg-ivory p-8 lg:p-10">
               <span className="display text-5xl text-gold">0{i + 1}</span>
               <h3 className="display mt-6 text-2xl">{step.title}</h3>
               <p className="mt-3 text-sm leading-relaxed text-stone">{step.text}</p>
