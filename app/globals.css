@@ -1,26 +1,172 @@
 @import "tailwindcss";
+@import "lenis/dist/lenis.css";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@theme {
+  --color-ivory: #f8f5ef;
+  --color-paper: #fffdf9;
+  --color-sand: #efe8dc;
+  --color-line: #e3dacb;
+  --color-ink: #1f1c18;
+  --color-stone: #6d655b;
+  --color-gold: #a2834a;
+  --color-gold-soft: #cbb68c;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-serif: var(--font-cormorant), "Cormorant Garamond", Georgia, serif;
+  --font-sans: var(--font-jost), "Jost", ui-sans-serif, system-ui, sans-serif;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  scroll-behavior: smooth;
+}
+
+/* Lenis handles smoothing itself; native smooth scrolling would fight it. */
+html.lenis,
+html.lenis body {
+  scroll-behavior: auto;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--color-ivory);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  font-weight: 300;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+::selection {
+  background: var(--color-gold-soft);
+  color: var(--color-ink);
+}
+
+@layer components {
+  .eyebrow {
+    font-size: 0.7rem;
+    font-weight: 400;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: var(--color-gold);
+  }
+
+  .display {
+    font-family: var(--font-serif);
+    font-weight: 300;
+    line-height: 1.04;
+    letter-spacing: -0.01em;
+  }
+
+  .prose-calm p + p {
+    margin-top: 1.25rem;
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    padding: 1rem 2rem;
+    font-size: 0.72rem;
+    font-weight: 400;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    transition:
+      background-color 0.4s ease,
+      color 0.4s ease,
+      border-color 0.4s ease;
+  }
+
+  .btn-dark {
+    background: var(--color-ink);
+    color: var(--color-paper);
+    border: 1px solid var(--color-ink);
+  }
+  .btn-dark:hover {
+    background: var(--color-gold);
+    border-color: var(--color-gold);
+  }
+
+  .btn-line {
+    border: 1px solid currentColor;
+  }
+  .btn-line:hover {
+    background: var(--color-ink);
+    border-color: var(--color-ink);
+    color: var(--color-paper);
+  }
+
+  .btn-light {
+    background: var(--color-paper);
+    color: var(--color-ink);
+    border: 1px solid var(--color-paper);
+  }
+  .btn-light:hover {
+    background: transparent;
+    color: var(--color-paper);
+  }
+
+  .link-line {
+    position: relative;
+    display: inline-block;
+    padding-bottom: 0.3rem;
+    font-size: 0.72rem;
+    font-weight: 400;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+  }
+  .link-line::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 1px;
+    background: currentColor;
+    transform-origin: left;
+    transition: transform 0.5s ease;
+  }
+  .link-line:hover::after {
+    transform: scaleX(0.4);
+  }
+
+  .zoom-img img {
+    transition: transform 1.4s cubic-bezier(0.2, 0.6, 0.2, 1);
+  }
+  .zoom-img:hover img {
+    transform: scale(1.04);
+  }
+
+  .rise {
+    animation: rise 1.2s cubic-bezier(0.2, 0.6, 0.2, 1) both;
+  }
+  .rise-2 {
+    animation-delay: 0.15s;
+  }
+  .rise-3 {
+    animation-delay: 0.3s;
+  }
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .rise {
+    animation: none;
+  }
+  .zoom-img img {
+    transition: none;
+  }
 }

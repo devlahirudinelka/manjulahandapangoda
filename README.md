@@ -1,36 +1,56 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Manjula Handapangoda Bridal
 
-## Getting Started
+Website for Manjula Handapangoda, bridal dresser and hair & makeup artist in Colombo.
+Built with Next.js 16 (App Router, Cache Components) and Tailwind CSS 4.
 
-First, run the development server:
+## Run it
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+pnpm install
+pnpm dev        # http://localhost:3000
+pnpm build && pnpm start
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Site map
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+| Page | Path |
+| --- | --- |
+| Home | `/` |
+| About | `/about` |
+| Services | `/services` |
+| Kandyan Bridal | `/services/kandyan-bridal` |
+| Western Bridal | `/services/western-bridal` |
+| Indian Bridal | `/services/indian-bridal` |
+| Bridal Hair & Makeup | `/services/hair-and-makeup` |
+| Occasion Dressing | `/services/occasion-dressing` |
+| Gallery (filter + lightbox) | `/gallery` |
+| Experience & FAQs | `/experience` |
+| Contact (WhatsApp / email enquiry form, map) | `/contact` |
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Also generated: `/sitemap.xml`, `/robots.txt`, a 404 page and LocalBusiness structured data.
 
-## Learn More
+## Where to edit
 
-To learn more about Next.js, take a look at the following resources:
+- **Contact details, social links, service text, FAQs** → `lib/site.ts`
+- **Photos, alt text and gallery order** → `lib/images.ts`
+- **Colours and type** → `app/globals.css` (`@theme` block)
+- **Live domain** → set `NEXT_PUBLIC_SITE_URL` (used for SEO, sitemap and social previews)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Photos
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+The photos are the Facebook images already on manjula.ceylexa.com and currently load from there.
+To host them in this project (recommended before launch):
 
-## Deploy on Vercel
+```bash
+node scripts/download-images.mjs
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+This saves every image to `public/images/` and switches the site to use them.
+You can then remove the `remotePatterns` entry from `next.config.ts`.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+To add a new photo: drop it into `public/images/`, add an entry in `lib/images.ts`, and add its key to `galleryOrder`.
+
+## Contact form
+
+The enquiry form has no backend. It composes the message and opens WhatsApp (or the visitor's email app),
+so enquiries arrive straight to +94 77 626 1006 / info.ManjulaStudio@gmail.com.
