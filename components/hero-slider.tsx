@@ -79,7 +79,7 @@ export function HeroSlider() {
       <div
         role="group"
         aria-label="Hero photos"
-        className="absolute bottom-8 left-6 z-10 flex items-center gap-5 text-paper lg:left-auto lg:right-10"
+        className="absolute bottom-8 left-6 z-10 flex items-center gap-5 text-paper lg:left-10"
       >
         <span className="text-[0.7rem] tabular-nums tracking-[0.3em]">
           0{current + 1} / 0{slides.length}

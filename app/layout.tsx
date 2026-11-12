@@ -4,6 +4,7 @@ import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
 import { ScrollReveal } from "@/components/scroll-reveal";
 import { SmoothScroll } from "@/components/smooth-scroll";
+import { WhatsAppButton } from "@/components/whatsapp-button";
 import { photos, photoSrc } from "@/lib/images";
 import { site } from "@/lib/site";
 import "./globals.css";
@@ -82,6 +83,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
             {children}
           </main>
           <Footer />
+          <WhatsAppButton />
         </SmoothScroll>
       </body>
     </html>

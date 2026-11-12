@@ -238,6 +238,22 @@ body {
 [data-reveal-delay="4"] { --rd: 0.48s; }
 [data-reveal-delay="5"] { --rd: 0.6s; }
 
+/* ---- Floating WhatsApp button ---- */
+.wa-ping {
+  animation: waPing 2.8s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+@keyframes waPing {
+  0% {
+    transform: scale(1);
+    opacity: 0.45;
+  }
+  70%,
+  100% {
+    transform: scale(1.6);
+    opacity: 0;
+  }
+}
+
 /* ---- Hero slideshow ---- */
 .hero-zoom {
   animation: heroZoom 9s cubic-bezier(0.2, 0.6, 0.2, 1) forwards;
@@ -290,6 +306,7 @@ body {
     transition: none;
   }
   .img-shimmer::after,
+  .wa-ping,
   .hero-zoom,
   .hero-progress {
     animation: none;
