@@ -5,7 +5,7 @@ import { locations, nav, services, site } from "@/lib/site";
 export function Footer() {
   return (
     <footer className="bg-ink text-paper/80">
-      <div className="mx-auto max-w-7xl px-6 pt-20 pb-10 lg:px-10">
+      <div className="mx-auto max-w-7xl px-6 pt-20 pb-28 lg:px-10">
         <div className="flex flex-col items-center text-center text-paper">
           <Logo large />
           <p className="display mt-8 max-w-md text-2xl italic text-paper/80">
@@ -106,9 +106,20 @@ export function Footer() {
           </div>
         </div>
 
-        <p className="mt-16 border-t border-paper/10 pt-8 text-center text-xs tracking-wide text-paper/50">
-          © 2026 {site.brand}. All rights reserved.
-        </p>
+        <div className="mt-16 flex flex-col items-center gap-3 border-t border-paper/10 pt-8 text-xs tracking-wide text-paper/50 sm:flex-row sm:justify-between">
+          <p>© 2026 {site.brand}. All rights reserved.</p>
+          <p>
+            Designed &amp; Developed by{" "}
+            <a
+              href="https://ceylexa.com/"
+              target="_blank"
+              rel="noopener"
+              className="text-paper/70 underline-offset-4 transition-colors hover:text-gold-soft hover:underline"
+            >
+              Ceylexa
+            </a>
+          </p>
+        </div>
       </div>
     </footer>
   );
