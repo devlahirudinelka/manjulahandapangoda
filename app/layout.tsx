@@ -1,11 +1,12 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import localFont from "next/font/local";
 import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
+import { InstagramSection } from "@/components/instagram-section";
 import { ScrollReveal } from "@/components/scroll-reveal";
 import { SmoothScroll } from "@/components/smooth-scroll";
 import { WhatsAppButton } from "@/components/whatsapp-button";
-import { photos, photoSrc } from "@/lib/images";
+import { ogImage } from "@/lib/seo";
 import { site } from "@/lib/site";
 import "./globals.css";
 
@@ -38,6 +39,10 @@ const jost = localFont({
   display: "swap",
 });
 
+export const viewport: Viewport = {
+  themeColor: "#fffdf9",
+};
+
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
   title: {
@@ -45,22 +50,46 @@ export const metadata: Metadata = {
     template: `%s | ${site.brand}`,
   },
   description: site.description,
+  applicationName: site.brand,
+  authors: [{ name: site.name }],
+  creator: site.name,
+  category: "Beauty & Bridal",
   keywords: [
     "Manjula Handapangoda",
     "bridal dresser Sri Lanka",
+    "bridal dresser Colombo",
     "Kandyan bridal",
+    "osari dressing",
     "bridal makeup Colombo",
+    "bridal makeup Kotte",
+    "bridal salon Hanwella",
     "Western bridal",
     "Indian bridal",
     "hair and makeup artist Colombo",
+    "wedding hair and makeup Sri Lanka",
   ],
+  alternates: { canonical: "/" },
+  formatDetection: { telephone: true, email: true, address: true },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: { index: true, follow: true, "max-image-preview": "large", "max-snippet": -1 },
+  },
   openGraph: {
     type: "website",
     siteName: site.brand,
     locale: "en_LK",
-    images: [{ url: photoSrc(photos.terrace), width: 2560, height: 1209 }],
+    url: "/",
+    title: `${site.brand} | Bridal Dresser & Makeup Artist, Colombo`,
+    description: site.description,
+    images: [ogImage("home")],
   },
-  twitter: { card: "summary_large_image" },
+  twitter: {
+    card: "summary_large_image",
+    title: `${site.brand} | Bridal Dresser & Makeup Artist, Colombo`,
+    description: site.description,
+    images: [ogImage("home").url],
+  },
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
@@ -82,6 +111,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           <main id="main" className="flex-1">
             {children}
           </main>
+          <InstagramSection />
           <Footer />
           <WhatsAppButton />
         </SmoothScroll>

@@ -1,13 +1,16 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/seo";
 import { BookingBand, PageIntro } from "@/components/sections";
 import { site } from "@/lib/site";
 import { GalleryGrid } from "./gallery-grid";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Gallery",
   description:
     "Kandyan, Western and Indian brides styled by Manjula Handapangoda in Colombo, Sri Lanka.",
-};
+  path: "/gallery",
+  image: "gallery",
+});
 
 export default function GalleryPage() {
   return (

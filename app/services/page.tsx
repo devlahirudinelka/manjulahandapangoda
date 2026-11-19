@@ -1,14 +1,17 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/seo";
 import Link from "next/link";
 import { Photo } from "@/components/photo";
 import { BookingBand, PageIntro } from "@/components/sections";
 import { services } from "@/lib/site";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Services",
   description:
     "Kandyan, Western and Indian bridal dressing, bridal hair & makeup, trials and saree dressing in Colombo, Sri Lanka.",
-};
+  path: "/services",
+  image: "services",
+});
 
 export default function ServicesPage() {
   return (

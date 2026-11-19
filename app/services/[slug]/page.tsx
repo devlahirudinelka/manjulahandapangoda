@@ -3,8 +3,8 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Photo } from "@/components/photo";
 import { BookingBand, Ornament } from "@/components/sections";
-import { photos, photoSrc } from "@/lib/images";
-import { getService, services, whatsappLink } from "@/lib/site";
+import { pageMetadata } from "@/lib/seo";
+import { getService, services, site, whatsappLink } from "@/lib/site";
 
 export function generateStaticParams() {
   return services.map((s) => ({ slug: s.slug }));
@@ -16,11 +16,13 @@ export async function generateMetadata({
   const { slug } = await params;
   const service = getService(slug);
   if (!service) return {};
-  return {
+  return pageMetadata({
     title: service.title,
     description: service.summary,
-    openGraph: { images: [photoSrc(photos[service.cover])] },
-  };
+    path: `/services/${service.slug}`,
+    image: service.slug,
+    keywords: [service.title, `${service.title} Colombo`, "Manjula Handapangoda"],
+  });
 }
 
 export default async function ServicePage({ params }: PageProps<"/services/[slug]">) {
@@ -30,8 +32,23 @@ export default async function ServicePage({ params }: PageProps<"/services/[slug
 
   const others = services.filter((s) => s.slug !== service.slug).slice(0, 3);
 
+  const serviceLd = {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    name: service.title,
+    description: service.summary,
+    url: `${site.url}/services/${service.slug}`,
+    image: `${site.url}/og/${service.slug}.jpg`,
+    areaServed: "Sri Lanka",
+    provider: { "@type": "BeautySalon", name: site.brand, url: site.url },
+  };
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceLd) }}
+      />
       <section className="mx-auto grid max-w-7xl gap-12 px-6 pt-32 pb-24 lg:grid-cols-12 lg:items-end lg:gap-20 lg:px-10 lg:pt-40">
         <div className="lg:col-span-6 lg:pb-10">
           <nav aria-label="Breadcrumb" className="rise text-xs uppercase tracking-[0.2em] text-stone">

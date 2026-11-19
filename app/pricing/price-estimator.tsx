@@ -11,8 +11,18 @@ import { whatsappLink } from "@/lib/site";
 
 type Selection = Record<string, number>;
 
-export function PriceEstimator() {
-  const [yearIndex, setYearIndex] = useState(0);
+export function PriceEstimator({
+  yearIndex: controlledYear,
+  onYearChange,
+}: {
+  /** When given, the year is controlled by the parent and the switch is hidden. */
+  yearIndex?: number;
+  onYearChange?: (index: number) => void;
+} = {}) {
+  const [ownYear, setOwnYear] = useState(0);
+  const controlled = controlledYear !== undefined;
+  const yearIndex = controlled ? controlledYear : ownYear;
+  const setYearIndex = onYearChange ?? setOwnYear;
   const [selection, setSelection] = useState<Selection>(defaultSelection);
   const [barVisible, setBarVisible] = useState(false);
   const sectionRef = useRef<HTMLDivElement>(null);
@@ -74,6 +84,8 @@ export function PriceEstimator() {
 
   return (
     <div ref={sectionRef}>
+      {controlled ? null : (
+        <>
       {/* Year switch */}
       <div className="flex flex-col items-center">
         <div
@@ -115,7 +127,10 @@ export function PriceEstimator() {
         ) : null}
       </div>
 
-      <div className="mt-20 grid gap-14 lg:grid-cols-12 lg:gap-16">
+        </>
+      )}
+
+      <div className={`${controlled ? "" : "mt-20 "}grid gap-14 lg:grid-cols-12 lg:gap-16`}>
         {/* Price menu */}
         <div className="space-y-16 lg:col-span-7">
           <p className="text-sm text-stone">

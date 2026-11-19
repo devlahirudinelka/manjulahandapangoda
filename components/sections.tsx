@@ -91,6 +91,10 @@ export function BookingBand({
           or call{" "}
           <a href={site.phoneHref} className="underline underline-offset-4">
             {site.phone}
+          </a>{" "}
+          or{" "}
+          <a href={site.phone2Href} className="underline underline-offset-4">
+            {site.phone2}
           </a>
         </p>
       </div>

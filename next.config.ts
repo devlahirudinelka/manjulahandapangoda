@@ -8,10 +8,10 @@ const nextConfig: NextConfig = {
   cacheComponents: true,
   partialPrefetching: true,
   images: {
-    // Photos are served from the existing WordPress site until they are
-    // downloaded into /public/images (see scripts/download-images.mjs).
+    // Instagram feed photos (lib/instagram.ts)
     remotePatterns: [
-      new URL("https://manjula.ceylexa.com/wp-content/uploads/**"),
+      { protocol: "https", hostname: "**.cdninstagram.com" },
+      { protocol: "https", hostname: "**.fbcdn.net" },
     ],
   },
   turbopack: {

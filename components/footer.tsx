@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { Logo } from "./logo";
-import { nav, services, site } from "@/lib/site";
+import { locations, nav, services, site } from "@/lib/site";
 
 export function Footer() {
   return (
@@ -52,24 +52,30 @@ export function Footer() {
                 <a href={site.phoneHref} className="hover:text-paper">
                   {site.phone}
                 </a>
+                <span className="text-paper/40"> · </span>
+                <a href={site.phone2Href} className="hover:text-paper">
+                  {site.phone2}
+                </a>
               </li>
               <li>
                 <a href={`mailto:${site.email}`} className="break-all hover:text-paper">
                   {site.email}
                 </a>
               </li>
-              <li>
-                <a
-                  href={site.mapsUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="hover:text-paper"
-                >
-                  {site.addressLine}
-                  <br />
-                  {site.city}
-                </a>
-              </li>
+              {locations.map((l) => (
+                <li key={l.slug}>
+                  <a
+                    href={l.shareUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="hover:text-paper"
+                  >
+                    <span className="text-paper">{l.label}</span>
+                    <br />
+                    {l.address}
+                  </a>
+                </li>
+              ))}
             </ul>
           </div>
 

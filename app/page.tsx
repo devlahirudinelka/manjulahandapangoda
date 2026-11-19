@@ -2,8 +2,8 @@ import Link from "next/link";
 import { HeroSlider } from "@/components/hero-slider";
 import { Photo } from "@/components/photo";
 import { BookingBand, Ornament, SectionHeading } from "@/components/sections";
-import { photos, photoSrc } from "@/lib/images";
-import { bridalStyles, journey, site } from "@/lib/site";
+import { logo, photoSrc } from "@/lib/images";
+import { bridalStyles, journey, locations, services, site } from "@/lib/site";
 
 const jsonLd = {
   "@context": "https://schema.org",
@@ -11,15 +11,26 @@ const jsonLd = {
   name: site.brand,
   description: site.description,
   url: site.url,
-  image: photoSrc(photos.terrace),
-  telephone: site.phone,
+  image: `${site.url}/og/home.jpg`,
+  logo: `${site.url}${photoSrc(logo)}`,
+  areaServed: ["Colombo", "Sri Jayawardenepura Kotte", "Hanwella", "Sri Lanka"],
+  makesOffer: services.map((s) => ({
+    "@type": "Offer",
+    itemOffered: { "@type": "Service", name: s.title },
+  })),
+  telephone: [site.phone, site.phone2],
   email: site.email,
-  address: {
-    "@type": "PostalAddress",
-    addressLocality: "Sri Jayawardenepura Kotte",
-    addressRegion: "Western Province",
-    addressCountry: "LK",
-  },
+  location: locations.map((l) => ({
+    "@type": "Place",
+    name: l.name,
+    hasMap: l.shareUrl,
+    address: {
+      "@type": "PostalAddress",
+      streetAddress: l.address,
+      addressLocality: l.locality,
+      addressCountry: "LK",
+    },
+  })),
   sameAs: [site.facebook, site.instagram],
 };
 
@@ -177,30 +188,6 @@ export default function Home() {
             How it works &amp; FAQs
           </Link>
         </div>
-      </section>
-
-      {/* Social */}
-      <section className="border-t border-line bg-paper py-24 text-center">
-        <p className="eyebrow">Follow along</p>
-        <a
-          href={site.instagram}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="display mt-5 inline-block text-3xl hover:text-gold sm:text-4xl"
-        >
-          @manjulahandapangodabridal
-        </a>
-        <p className="mt-4 text-stone">
-          See the latest brides on{" "}
-          <a href={site.instagram} target="_blank" rel="noopener noreferrer" className="underline underline-offset-4 hover:text-ink">
-            Instagram
-          </a>{" "}
-          and{" "}
-          <a href={site.facebook} target="_blank" rel="noopener noreferrer" className="underline underline-offset-4 hover:text-ink">
-            Facebook
-          </a>
-          .
-        </p>
       </section>
 
       <BookingBand />

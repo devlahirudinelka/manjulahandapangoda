@@ -1,17 +1,34 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/seo";
 import { Photo } from "@/components/photo";
 import { BookingBand, PageIntro, SectionHeading } from "@/components/sections";
 import { faqs, journey } from "@/lib/site";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "The Bridal Experience & FAQs",
   description:
     "How bridal styling with Manjula Handapangoda works, from consultation and trial to the wedding morning, plus answers to common questions.",
+  path: "/experience",
+  image: "experience",
+});
+
+const faqLd = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: faqs.map((f) => ({
+    "@type": "Question",
+    name: f.q,
+    acceptedAnswer: { "@type": "Answer", text: f.a },
+  })),
 };
 
 export default function ExperiencePage() {
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqLd) }}
+      />
       <PageIntro eyebrow="The experience" title={<>Calm, considered, <em>completely yours</em></>}>
         <p>
           Your wedding morning should feel unhurried. Here is how we get you

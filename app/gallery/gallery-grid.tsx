@@ -3,28 +3,35 @@
 import { FadeImage } from "@/components/fade-image";
 import { useCallback, useEffect, useState } from "react";
 import { useScrollLock } from "@/components/smooth-scroll";
-import { galleryOrder, photos, photoSrc, type Photo, type Style } from "@/lib/images";
+import { gallery } from "@/lib/gallery";
+import { photoSrc, type Style } from "@/lib/images";
 
 const filters: { id: "all" | Style; label: string }[] = [
   { id: "all", label: "All" },
   { id: "kandyan", label: "Kandyan" },
   { id: "western", label: "Western" },
   { id: "indian", label: "Indian" },
+  { id: "homecoming", label: "Homecoming" },
+  { id: "dressing", label: "Occasion dressing" },
+  { id: "behind", label: "Behind the scenes" },
 ];
+
+const PAGE = 24;
 
 export function GalleryGrid() {
   const [filter, setFilter] = useState<"all" | Style>("all");
   const [index, setIndex] = useState<number | null>(null);
+  const [shown, setShown] = useState(PAGE);
 
-  const items = galleryOrder
-    .map((key): Photo => photos[key])
-    .filter((p) => filter === "all" || p.style === filter);
+  const items = gallery.filter((p) => filter === "all" || p.style === filter);
+  const visible = items.slice(0, shown);
+  const count = items.length;
 
   const close = useCallback(() => setIndex(null), []);
   const step = useCallback(
     (dir: number) =>
-      setIndex((i) => (i === null ? i : (i + dir + items.length) % items.length)),
-    [items.length],
+      setIndex((i) => (i === null ? i : (i + dir + count) % count)),
+    [count],
   );
 
   useEffect(() => {
@@ -50,7 +57,10 @@ export function GalleryGrid() {
             key={f.id}
             type="button"
             aria-pressed={filter === f.id}
-            onClick={() => setFilter(f.id)}
+            onClick={() => {
+              setFilter(f.id);
+              setShown(PAGE);
+            }}
             className={`px-5 py-2.5 text-[0.7rem] uppercase tracking-[0.24em] transition-colors ${
               filter === f.id
                 ? "bg-ink text-paper"
@@ -58,12 +68,15 @@ export function GalleryGrid() {
             }`}
           >
             {f.label}
+            <span className="ml-1.5 opacity-50">
+              {f.id === "all" ? gallery.length : gallery.filter((p) => p.style === f.id).length}
+            </span>
           </button>
         ))}
       </div>
 
       <ul className="mt-14 columns-2 gap-3 md:columns-3 md:gap-4 lg:columns-4">
-        {items.map((p, i) => (
+        {visible.map((p, i) => (
           <li
             key={p.file}
             data-reveal
@@ -90,6 +103,14 @@ export function GalleryGrid() {
           </li>
         ))}
       </ul>
+
+      {shown < items.length ? (
+        <div className="mt-12 text-center">
+          <button type="button" onClick={() => setShown((n) => n + PAGE)} className="btn btn-line">
+            Show more <span className="opacity-60">({items.length - shown})</span>
+          </button>
+        </div>
+      ) : null}
 
       {current ? (
         <div

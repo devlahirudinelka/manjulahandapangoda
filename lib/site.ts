@@ -6,20 +6,51 @@ export const site = {
   description:
     "Bridal dresser, fashion stylist and hair & makeup artist in Colombo, Sri Lanka. Sophisticated, timeless Kandyan, Western and Indian bridal looks.",
   url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://manjula.ceylexa.com",
+  /** Both numbers ring the same team; the first is also used for WhatsApp. */
   phone: "+94 77 626 1006",
   phoneHref: "tel:+94776261006",
+  phone2: "+94 71 326 1006",
+  phone2Href: "tel:+94713261006",
   whatsapp: "94776261006",
   email: "info.ManjulaStudio@gmail.com",
-  addressLine: "Sri Jayawardenepura Kotte",
-  city: "Colombo, Sri Lanka",
-  plusCode: "VWVH+H33",
-  mapsUrl:
-    "https://www.google.com/maps/search/?api=1&query=VWVH%2BH33%2C%20Sri%20Jayawardenepura%20Kotte%2C%20Sri%20Lanka",
-  mapsEmbed:
-    "https://www.google.com/maps?q=VWVH%2BH33%2C%20Sri%20Jayawardenepura%20Kotte%2C%20Sri%20Lanka&output=embed",
   facebook: "https://www.facebook.com/ManjulaHandapangodaBridal/",
   instagram: "https://www.instagram.com/manjulahandapangodabridal/",
 };
+
+export type Location = {
+  slug: string;
+  name: string;
+  /** Short label for tabs and small headings. */
+  label: string;
+  address: string;
+  locality: string;
+  /** Google Maps share link supplied by the business. */
+  shareUrl: string;
+  mapsEmbed: string;
+};
+
+export const locations: Location[] = [
+  {
+    slug: "bridal-studio",
+    name: "Manjula Handapangoda Bridal Studio",
+    label: "Bridal Studio",
+    address: "VWVH+H33, Sri Jayawardenepura Kotte, Sri Lanka (near Battaramulla)",
+    locality: "Sri Jayawardenepura Kotte",
+    shareUrl: "https://share.google/nRQ4aUwYZrHpOu2fC",
+    mapsEmbed:
+      "https://www.google.com/maps?q=VWVH%2BH33%2C%20Sri%20Jayawardenepura%20Kotte%2C%20Sri%20Lanka&output=embed",
+  },
+  {
+    slug: "salon",
+    name: "Salon Manjula Handapangoda",
+    label: "Salon",
+    address: "Salon Manjula Handapangoda, Hanwella, Sri Lanka",
+    locality: "Hanwella",
+    shareUrl: "https://share.google/XRUUEATMf3jAvtT1X",
+    mapsEmbed:
+      "https://www.google.com/maps?q=Salon%20Manjula%20Handapangoda%2C%20Hanwella%2C%20Sri%20Lanka&output=embed",
+  },
+];
 
 export function whatsappLink(text?: string) {
   const base = `https://wa.me/${site.whatsapp}`;
@@ -153,9 +184,9 @@ export const services: Service[] = [
       "Group bookings for bridesmaids and family",
     ],
     idealFor: "Bridesmaids, family of the couple and special events.",
-    cover: "sareeGarden",
-    hero: "couple",
-    looks: ["kandyanSilver", "kandyanWhite", "kandyanGold"],
+    cover: "occasionSaree",
+    hero: "bridesmaids",
+    looks: ["occasionGlam", "occasionLace", "sareeGarden"],
   },
 ];
 

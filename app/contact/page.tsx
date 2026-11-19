@@ -1,20 +1,28 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/seo";
 import { Photo } from "@/components/photo";
 import { PageIntro } from "@/components/sections";
-import { site, whatsappLink } from "@/lib/site";
+import { locations, site, whatsappLink } from "@/lib/site";
 import { EnquiryForm } from "./enquiry-form";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Contact & Booking",
   description:
-    "Book bridal hair, makeup and dressing with Manjula Handapangoda in Sri Jayawardenepura Kotte, Colombo. Call or WhatsApp +94 77 626 1006.",
-};
+    "Book bridal hair, makeup and dressing with Manjula Handapangoda at the Bridal Studio in Sri Jayawardenepura Kotte or the Salon in Hanwella. Call or WhatsApp +94 77 626 1006 or +94 71 326 1006.",
+  path: "/contact",
+  image: "contact",
+});
 
 const details = [
   {
     label: "Call",
     value: site.phone,
     href: site.phoneHref,
+  },
+  {
+    label: "Call",
+    value: site.phone2,
+    href: site.phone2Href,
   },
   {
     label: "WhatsApp",
@@ -26,12 +34,6 @@ const details = [
     label: "Email",
     value: site.email,
     href: `mailto:${site.email}`,
-  },
-  {
-    label: "Studio",
-    value: `${site.addressLine}, ${site.city}`,
-    href: site.mapsUrl,
-    external: true,
   },
 ];
 
@@ -60,7 +62,7 @@ export default function ContactPage() {
           <Photo name="kandyanWhite" className="aspect-[4/5]" sizes="(min-width: 1024px) 40vw, 100vw" />
           <dl className="mt-10 divide-y divide-line border-y border-line">
             {details.map((d) => (
-              <div key={d.label} className="flex flex-col gap-1 py-5 sm:flex-row sm:justify-between sm:gap-6">
+              <div key={d.value + d.label} className="flex flex-col gap-1 py-5 sm:flex-row sm:justify-between sm:gap-6">
                 <dt className="eyebrow pt-1">{d.label}</dt>
                 <dd className="sm:text-right">
                   <a
@@ -74,7 +76,24 @@ export default function ContactPage() {
               </div>
             ))}
           </dl>
-          <div className="mt-8 flex gap-8">
+          <div className="mt-10 space-y-8">
+            {locations.map((l) => (
+              <div key={l.slug}>
+                <h3 className="eyebrow">{l.label}</h3>
+                <p className="display mt-2 text-xl">{l.name}</p>
+                <p className="mt-1 text-stone">{l.address}</p>
+                <a
+                  href={l.shareUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="link-line mt-3 inline-block text-sm"
+                >
+                  View on Google Maps
+                </a>
+              </div>
+            ))}
+          </div>
+          <div className="mt-10 flex gap-8">
             <a href={site.instagram} target="_blank" rel="noopener noreferrer" className="link-line">
               Instagram
             </a>
@@ -85,14 +104,17 @@ export default function ContactPage() {
         </aside>
       </section>
 
-      <section aria-label="Map" className="border-t border-line">
-        <iframe
-          title="Map showing the studio in Sri Jayawardenepura Kotte"
-          src={site.mapsEmbed}
-          className="block h-[420px] w-full grayscale-[0.6]"
-          loading="lazy"
-          referrerPolicy="no-referrer-when-downgrade"
-        />
+      <section aria-label="Maps" className="grid border-t border-line md:grid-cols-2">
+        {locations.map((l) => (
+          <iframe
+            key={l.slug}
+            title={`Map showing ${l.name}, ${l.locality}`}
+            src={l.mapsEmbed}
+            className="block h-[420px] w-full grayscale-[0.6]"
+            loading="lazy"
+            referrerPolicy="no-referrer-when-downgrade"
+          />
+        ))}
       </section>
     </>
   );

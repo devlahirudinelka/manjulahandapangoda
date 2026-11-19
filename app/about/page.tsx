@@ -1,14 +1,17 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/seo";
 import Link from "next/link";
 import { Photo } from "@/components/photo";
 import { BookingBand, Ornament, PageIntro, SectionHeading } from "@/components/sections";
 import { bridalStyles } from "@/lib/site";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "About Manjula",
   description:
     "Manjula Handapangoda is a Colombo-based bridal dresser, fashion stylist and hair & makeup artist specialising in Kandyan, Western and Indian bridal styling.",
-};
+  path: "/about",
+  image: "about",
+});
 
 const values = [
   {
@@ -78,6 +81,15 @@ export default function AboutPage() {
             <Photo name="kandyanProfile" className="aspect-[3/4]" sizes="(min-width: 1024px) 28vw, 50vw" />
             <Photo name="laceVeil" className="mt-12 aspect-[3/4]" sizes="(min-width: 1024px) 28vw, 50vw" delay={1} />
           </div>
+        </div>
+      </section>
+
+      <section className="mx-auto max-w-7xl px-6 pb-28 lg:px-10 lg:pb-36">
+        <SectionHeading eyebrow="Recognition" title="Recognised for the craft" />
+        <div className="mt-14 grid grid-cols-3 gap-3 sm:gap-6">
+          <Photo name="manjulaAward" className="aspect-[3/4]" sizes="33vw" />
+          <Photo name="manjulaTrophy" className="mt-10 aspect-[3/4] sm:mt-16" sizes="33vw" delay={1} />
+          <Photo name="manjulaSuit" className="aspect-[3/4]" sizes="33vw" delay={2} />
         </div>
       </section>
 
